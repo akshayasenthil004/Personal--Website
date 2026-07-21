@@ -2,13 +2,14 @@ import React, { useEffect, useRef, useState, useCallback, useLayoutEffect } from
 import './App.css';
 import BottomNav from './BottomNav';
 import img from './pic.png';
+import photoBgRef from './assets/photo_bg_reference.png';
 // import pic from './assests/craftp.jpg';
 // import file from './assests/eternal.png';
 import Preloader from './Preloader';
 import CursorFollower from './CursorFollower';
 import MagneticButton from './MagneticButton';
 import TiltCard from './TiltCard';
-import ProjectCoverflow from './ProjectCoverflow';
+import ProjectBentoGrid from './ProjectBentoGrid';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from '@studio-freight/lenis';
@@ -42,21 +43,13 @@ const PROJECTS = [
     title: 'Mental Health Management',
     image: 'https://images.indianexpress.com/2022/02/mental-health_1200_gettyimages.jpg',
     description:
-      'Full stack web application to manage mental health services, with secure auth, role-based access for users, admins, and counsellors, and an appointment booking system.',
+      'Developed a full stack web application using React.js, Node.js, Express.js, and MongoDB to manage mental health services. Implemented secure user authentication and authorization, role-based access for users, admins, and counsellors, and an appointment booking and management system.',
+    summary: 'Role-based healthcare portal with appointment booking & secure auth.',
+    year: '2025',
+    category: 'Full Stack',
     tags: ['React', 'Node.js', 'Express', 'MongoDB'],
     live: 'https://mental-health-jn7c.vercel.app/',
     code: 'https://github.com/AkshayaSenthil08/Mental-Health',
-  },
-  {
-    id: 'crud',
-    filename: 'crud-app.tsx',
-    title: 'Basic CRUD',
-    image: 'https://www.shutterstock.com/image-illustration/crud-acronym-create-read-update-600nw-2491959959.jpg',
-    description:
-      'Full stack web application with complete CRUD functionality, secure authentication, authorization, and role-based access control behind a clean, modern UI.',
-    tags: ['React', 'Node.js', 'Express', 'MongoDB'],
-    live: 'https://task-amber-zeta.vercel.app/',
-    code: 'https://github.com/AkshayaSenthil08/task',
   },
   {
     id: 'railway',
@@ -64,7 +57,10 @@ const PROJECTS = [
     title: 'Railway Ticket Booking',
     image: 'https://images.pexels.com/photos/1548693/pexels-photo-1548693.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
     description:
-      'A dynamic JavaScript web application enabling users to search trains, select seats, make bookings, and view PNR status via client-side logic.',
+      'A JavaScript web application that enables users to search trains, select seats, make bookings and view PNR status via client-side logic. Managed client-side state (localStorage) for booking history, implemented form validation, error handling and loading states for improved UX.',
+    summary: 'Interactive train reservation system & PNR lookup.',
+    year: '2024',
+    category: 'Web App',
     tags: ['JavaScript', 'HTML', 'CSS', 'LocalStorage'],
     live: 'https://railway-reservation-nu.vercel.app/',
     code: 'https://github.com/AkshayaSenthil08/RailwayReservation',
@@ -75,18 +71,38 @@ const PROJECTS = [
     title: 'Currency Converter',
     image: 'https://media.istockphoto.com/id/483424683/photo/euro-and-dollar-symbol-eur-usd-pair.jpg?s=612x612&w=0&k=20&c=sxpJ59whk1IQbv2O22UE0zYEmZ9zZA76-iJBsrsAa_I=',
     description:
-      'A responsive React web app that converts real-time currency values using exchange rate APIs, with dynamic input validation and a modern UI.',
+      'A responsive React web app that converts real-time currency values using exchange rate APIs with dynamic input validation and modern UI. Built a Currency Converter App in React that fetches live exchange rates from a public API (like Exchange Rate API or Free CurrencyAPI).',
+    summary: 'Real-time FX rates converter with clean input validation.',
+    year: '2024',
+    category: 'React App',
     tags: ['React', 'JavaScript', 'API'],
     live: 'https://converter-three-mu.vercel.app/',
     code: 'https://github.com/AkshayaSenthil08/Converter',
   },
   {
+    id: 'crud',
+    filename: 'crud-app.tsx',
+    title: 'Basic CRUD',
+    image: 'https://www.shutterstock.com/image-illustration/crud-acronym-create-read-update-600nw-2491959959.jpg',
+    description:
+      'Full stack web application with complete CRUD functionality, secure authentication, authorization, and role-based access control behind a clean, modern UI.',
+    summary: 'Full stack task management system with auth & RBAC.',
+    year: '2025',
+    category: 'Full Stack',
+    tags: ['React', 'Node.js', 'Express', 'MongoDB'],
+    live: 'https://task-amber-zeta.vercel.app/',
+    code: 'https://github.com/AkshayaSenthil08/task',
+  },
+  {
     id: 'crafto',
     filename: 'crafto.html',
     title: 'Crafto Project',
-    // image: pic,
+    image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80',
     description:
       'A responsive jewellery e-commerce website showcasing modern UI design, product listings, and a user-friendly layout.',
+    summary: 'Luxury jewellery e-commerce showcase & dynamic layout.',
+    year: '2024',
+    category: 'UI/UX',
     tags: ['HTML', 'CSS'],
     live: 'https://luxury-project.vercel.app/',
     code: 'https://github.com/AkshayaSenthil08/LuxuryProject',
@@ -95,9 +111,12 @@ const PROJECTS = [
     id: 'eternal',
     filename: 'eternal.html',
     title: 'Eternal Project',
-    // image: file,
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
     description:
       'A clean, modern multi-section landing page showcasing services, portfolio items, and team information with a fully responsive layout.',
+    summary: 'Multi-section corporate agency landing page.',
+    year: '2024',
+    category: 'Landing Page',
     tags: ['HTML', 'CSS'],
     live: 'https://eternal-project.vercel.app/',
     code: 'https://github.com/AkshayaSenthil08/EternalProject',
@@ -411,15 +430,15 @@ function App() {
               <span className="bracket">&lt;</span>
               <div className="role-wrapper">
                 <ul className="role-list">
-                  <li>Software Developer</li>
+                  <li>Full Stack Developer</li>
                   <li>IT Graduate</li>
-                  <li>Frontend Developer</li>
+                  <li>React & Node Engineer</li>
                 </ul>
               </div>
               <span className="bracket">/&gt;</span>
             </div>
 
-            <p>Passionate about building clean UI and scalable web applications.</p>
+            <p>IT Graduate with a passion for problem solving. Full Stack Developer with practical experience in both frontend and backend development.</p>
 
             <div className="buttons">
               <MagneticButton>
@@ -458,16 +477,10 @@ function App() {
               </div>
               <div className="term-body">
                 <div><span className="c">{'{'}</span></div>
-                <div>&nbsp;&nbsp;<span className="k">"name"</span><span className="c">:</span> <span className="s">"Akshaya Senthilkumar"</span><span className="c">,</span></div>
-                <div>&nbsp;&nbsp;<span className="k">"role"</span><span className="c">:</span> <span className="s">"Frontend Developer"</span><span className="c">,</span></div>
-                <div>&nbsp;&nbsp;<span className="k">"stack"</span><span className="c">:</span> <span className="c">[</span><span className="s">"React"</span><span className="c">,</span> <span className="s">"Node"</span><span className="c">,</span> <span className="s">"Mongo"</span><span className="c">],</span></div>
-                <div>&nbsp;&nbsp;<span className="k">"email"</span><span className="c">:</span>{' '}
-                  <a className="s" href="mailto:itaakshayas@gmail.com">"itaakshayas@gmail.com"</a><span className="c">,</span>
-                </div>
-                <div>&nbsp;&nbsp;<span className="k">"github"</span><span className="c">:</span>{' '}
-                  <a className="s" href="https://github.com/akshayasenthil004" target="_blank" rel="noopener noreferrer">"@akshayasenthil004"</a><span className="c">,</span>
-                </div>
-                <div>&nbsp;&nbsp;<span className="k">"status"</span><span className="c">:</span> <span className="n">available</span></div>
+                <div>&nbsp;&nbsp;<span className="k">"name"</span><span className="c">:</span> <span className="s">"Akshaya S"</span><span className="c">,</span></div>
+                <div>&nbsp;&nbsp;<span className="k">"role"</span><span className="c">:</span> <span className="s">"Full Stack Developer"</span><span className="c">,</span></div>
+                <div>&nbsp;&nbsp;<span className="k">"specialization"</span><span className="c">:</span> <span className="s">"MERN Stack & REST APIs"</span><span className="c">,</span></div>
+                <div>&nbsp;&nbsp;<span className="k">"status"</span><span className="c">:</span> <span className="n">available_for_opportunities</span></div>
                 <div><span className="c">{'}'}</span></div>
               </div>
             </div>
@@ -476,47 +489,185 @@ function App() {
       </section>
 
       {/* ══════════════════ ABOUT ══════════════════ */}
-      <section id="about" className="about-section" ref={aboutRef}>
-        <div className="prompt">cd ./about<span className="caret" /></div>
+     <section id="about" className="about-section" ref={aboutRef}>
+        <div className="about-bg-glows">
+          <div className="glow-orb orb-1" />
+          <div className="glow-orb orb-2" />
+        </div>
+
+        <div className="prompt">cd ./about-me<span className="caret" /></div>
 
         <div className="about-bento">
-          <div className="about-text card">
-            <h2>Who I am</h2>
+          {/* Card 1: Main Bio Card (Layered depth with status chips) */}
+          <div className="about-card about-main-card">
+            <div className="card-tag">~/bio/overview.md</div>
+            <h2>Profile Summary</h2>
             <p>
-              I'm <strong>Akshaya S.</strong>, a web developer who bridges the gap between clean, scalable architecture and highly interactive user experiences. With solid hands-on experience in modern front-end engineering, I focus on transforming complex ideas into pixel-perfect, responsive web applications.
-            </p>
-            <p>
-              I have hands-on experience with HTML, CSS, JavaScript, and React.js, and I've
-              built real-world projects like a Movie Finder App, Currency Converter, and a
-              Rail Ticket Booking system.
+              Full Stack Developer with practical experience in both frontend and backend development. Proficient in React.js, REST APIs, Node.js, Express.js, and MongoDB. Strong understanding of application flow, authentication, and database operations. Capable of delivering responsive, scalable, and maintainable web solutions.
             </p>
 
             <div className="about-skills-badges">
-              <span className="badge">HTML5</span>
-              <span className="badge">CSS3</span>
+              <span className="badge">Html</span>
+              <span className="badge">Css</span>
               <span className="badge">JavaScript</span>
-              <span className="badge">TypeScript</span>
-              <span className="badge">React.js</span>
-              <span className="badge">Node.js</span>
-              <span className="badge">MongoDB</span>
+              <span className="badge">React</span>
+              <span className="badge">Node JS</span>
+              <span className="badge">Express JS</span>
+              <span className="badge">Github</span>
+              <span className="badge">WordPress</span>
+              <span className="badge">Mongo DB</span>
             </div>
           </div>
 
-          <div className="about-illustration card">
-            <img src={img} alt="Developer Illustration" />
+          {/* Card 2: Profile Photo Card */}
+          <div className="about-card about-profile-card">
+            <div className="card-tag">~/assets/avatar.svg</div>
+            <div className="exact-photo-container">
+              <svg
+                viewBox="0 0 518 509"
+                className="exact-photo-svg"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <clipPath id="exactStadiumClip">
+                    <rect x="85" y="138" width="348" height="356" rx="135" ry="135" />
+                  </clipPath>
+                </defs>
+                <image href={photoBgRef} width="518" height="509" />
+                <image
+                  href={img}
+                  x="85"
+                  y="138"
+                  width="348"
+                  height="356"
+                  preserveAspectRatio="xMidYMin slice"
+                  clipPath="url(#exactStadiumClip)"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* ══════════════════ EXPLORE ME / EDUCATION & EXPERIENCE ══════════════════ */}
+      <section id="explore" className="explore-section">
+        <div className="explore-container">
+          {/* Left Column: Personal Info & Action Badges */}
+          <div className="explore-left">
+            <div className="prompt">cat ./personal-info<span className="caret" /></div>
+            <h2 className="explore-title">Explore Me.</h2>
+            <p className="explore-bio">
+              Full Stack Developer with practical experience in both frontend and backend development.
+              Proficient in React.js, REST APIs, Node.js, Express.js, and MongoDB. Strong understanding of
+              application flow, authentication, and database operations. Capable of delivering responsive,
+              scalable, and maintainable web solutions.
+            </p>
+
+            <div className="explore-meta-list">
+              <div className="meta-item">
+                <span className="meta-label">Location:</span>
+                <span className="meta-value">Coimbatore</span>
+              </div>
+              <div className="meta-item">
+                <span className="meta-label">Languages:</span>
+                <span className="meta-value">Tamil, English</span>
+              </div>
+            </div>
+
+            <div className="explore-actions">
+              <a href="#projects" className="explore-btn primary">
+                VIEW MY WORK
+              </a>
+              <a href="#contact" className="explore-btn secondary">
+                CONTACT ME
+              </a>
+            </div>
           </div>
 
-          <div className="about-stack card">
-            <h3>package.json</h3>
-            <div className="stack-list">
-              <div><span className="pkg">react</span> <span className="ver">^18.2.0</span></div>
-              <div><span className="pkg">node</span> <span className="ver">^20.0.0</span></div>
-              <div><span className="pkg">express</span> <span className="ver">^4.18.0</span></div>
-              <div><span className="pkg">mongodb</span> <span className="ver">^6.0.0</span></div>
-              <div><span className="pkg">typescript</span> <span className="ver">^5.3.0</span></div>
+          {/* Right Column: Experience & Education Timeline */}
+          <div className="explore-right">
+            <div className="timeline-header">
+              <span className="timeline-badge">EXPERIENCE & EDUCATION</span>
             </div>
-            <div className="status-line">
-              <span className="n">&gt;</span> currently exploring motion design, one commit at a time.
+
+            <div className="timeline">
+              {/* Item 1: Experience */}
+              <div className="timeline-item">
+                <div className="timeline-node">
+                  <span className="node-dot" />
+                </div>
+                <div className="timeline-content card">
+                  <div className="timeline-header-line">
+                    <span className="timeline-type">EXPERIENCE</span>
+                    <span className="timeline-date">Mar 2026 – June 2026</span>
+                  </div>
+                  <h3 className="timeline-role">Junior Web Developer</h3>
+                  <div className="timeline-org">Sai Techno Solutions</div>
+                  <ul className="timeline-bullets">
+                    <li>Developed and maintained responsive UI components using React.js and JavaScript for client-facing web applications.</li>
+                    <li>Integrated REST APIs with the frontend to fetch and display dynamic data, handling loading states and error scenarios.</li>
+                    <li>Collaborated with the team on bug fixes, code reviews, and improving overall application performance and UX.</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Item 2: Education B.Tech */}
+              <div className="timeline-item">
+                <div className="timeline-node">
+                  <span className="node-dot" />
+                </div>
+                <div className="timeline-content card">
+                  <div className="timeline-header-line">
+                    <span className="timeline-type">EDUCATION</span>
+                    <span className="timeline-date">2021 – 2025</span>
+                  </div>
+                  <h3 className="timeline-role">B.Tech – Information Technology</h3>
+                  <div className="timeline-org">
+                    <span>Mahendra Engineering College, Namakkal</span>
+                    <span className="timeline-score">83%</span>
+                  </div>
+                  <p className="timeline-desc">
+                    Specialized in IT with a focus on web development, full-stack architecture, software engineering, and database management.
+                  </p>
+                </div>
+              </div>
+
+              {/* Item 3: Education HSC */}
+              <div className="timeline-item">
+                <div className="timeline-node">
+                  <span className="node-dot" />
+                </div>
+                <div className="timeline-content card">
+                  <div className="timeline-header-line">
+                    <span className="timeline-type">EDUCATION</span>
+                    <span className="timeline-date">2020 – 2021</span>
+                  </div>
+                  <h3 className="timeline-role">HSC</h3>
+                  <div className="timeline-org">
+                    <span>Dayananda Vidyalaya Matric Higher Secondary School</span>
+                    <span className="timeline-score">91.8%</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Item 4: Education SSLC */}
+              <div className="timeline-item">
+                <div className="timeline-node">
+                  <span className="node-dot" />
+                </div>
+                <div className="timeline-content card">
+                  <div className="timeline-header-line">
+                    <span className="timeline-type">EDUCATION</span>
+                    <span className="timeline-date">2018 – 2019</span>
+                  </div>
+                  <h3 className="timeline-role">SSLC</h3>
+                  <div className="timeline-org">
+                    <span>Government High School</span>
+                    <span className="timeline-score">90.3%</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -529,7 +680,7 @@ function App() {
 
         <div className="skills-container">
           <div className="skills-category">
-            <h3 className="category-title">Frontend</h3>
+            <h3 className="category-title">Frontend & CMS</h3>
             <div className="skills-grid">
               <div className="skill-card">
                 <img src="https://dev-portfolio-template.netlify.app/static/media/react.2b6a0717.svg" alt="React" />
@@ -547,11 +698,15 @@ function App() {
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/CSS3_logo.svg/2048px-CSS3_logo.svg.png" alt="CSS" />
                 <h4>CSS</h4>
               </div>
+              <div className="skill-card">
+                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/wordpress/wordpress-plain.svg" alt="WordPress" />
+                <h4>WordPress</h4>
+              </div>
             </div>
           </div>
 
           <div className="skills-category">
-            <h3 className="category-title">Backend & Database</h3>
+            <h3 className="category-title">Backend, Database & Tools</h3>
             <div className="skills-grid">
               <div className="skill-card">
                 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" alt="Node JS" />
@@ -565,6 +720,10 @@ function App() {
                 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg" alt="Mongo DB" />
                 <h4>Mongo DB</h4>
               </div>
+              <div className="skill-card">
+                <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="Github" />
+                <h4>Github</h4>
+              </div>
             </div>
           </div>
         </div>
@@ -575,7 +734,7 @@ function App() {
         <div className="prompt">ls ./projects<span className="caret" /></div>
         <h2>Projects</h2>
 
-        <ProjectCoverflow projects={PROJECTS} />
+        <ProjectBentoGrid projects={PROJECTS} />
       </div>
 
       {/* ══════════════════ CONTACT ══════════════════ */}
