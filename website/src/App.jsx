@@ -726,6 +726,28 @@ function App() {
               </div>
             </div>
           </div>
+
+          <div className="skills-category">
+            <h3 className="category-title">AI Tools & Workflows</h3>
+            <div className="skills-grid">
+              <div className="skill-card">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310a37f'><path d='M22.28 9.82a5.98 5.98 0 0 0-.52-4.91 6.05 6.05 0 0 0-6.51-2.9 6.07 6.07 0 0 0-4.33-1.93 6.04 6.04 0 0 0-5.83 4.14 6 6 0 0 0-4 2.89 6.05 6.05 0 0 0 .74 7.1 5.98 5.98 0 0 0 .51 4.91 6.05 6.05 0 0 0 6.51 2.9 5.98 5.98 0 0 0 4.33 1.93 6.06 6.06 0 0 0 5.77-4.2 5.99 5.99 0 0 0 4-2.9 6.06 6.06 0 0 0-.75-7.07zm-9.02 12.6a4.48 4.48 0 0 1-2.88-1.04l.14-.08 4.78-2.76a.79.79 0 0 0 .39-.68v-6.74l2.02 1.17a.07.07 0 0 1 .04.05v5.58a4.5 4.5 0 0 1-4.49 4.5zm-8.62-3.83a4.48 4.48 0 0 1-.54-3l.14.08 4.78 2.76a.79.79 0 0 0 .79 0l5.83-3.37v2.34a.07.07 0 0 1-.03.06l-4.83 2.79a4.5 4.5 0 0 1-6.14-1.66zm-1.23-9.42a4.48 4.48 0 0 1 2.34-1.96l-.001.16v5.52a.79.79 0 0 0 .39.68l5.83 3.37-2.02 1.17a.07.07 0 0 1-.07 0l-4.83-2.79a4.5 4.5 0 0 1-1.64-6.15zm16.7 3.12l-5.83-3.37 2.02-1.17a.07.07 0 0 1 .07 0l4.83 2.79a4.5 4.5 0 0 1 1.64 6.15 4.48 4.48 0 0 1-2.34 1.96l.001-.16v-5.52a.79.79 0 0 0-.39-.68zm1.65-5.59a4.48 4.48 0 0 1 .53 3l-.14-.08-4.78-2.76a.79.79 0 0 0-.79 0l-5.83 3.37V8.98a.07.07 0 0 1 .03-.06l4.83-2.79a4.5 4.5 0 0 1 6.14 1.66zm-11.46-5.33a4.48 4.48 0 0 1 2.88 1.04l-.14.08-4.78 2.76a.79.79 0 0 0-.39.68v6.74l-2.02-1.17a.07.07 0 0 1-.04-.05V6.44a4.5 4.5 0 0 1 4.49-4.5z'/></svg>" alt="ChatGPT" />
+                <h4>ChatGPT</h4>
+              </div>
+              <div className="skill-card">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='10' fill='url(%23agGlow)'/><path d='M12 4L14.5 9.5L20 12L14.5 14.5L12 20L9.5 14.5L4 12L9.5 9.5L12 4Z' fill='%23ffffff'/><defs><linearGradient id='agGlow' x1='0' y1='0' x2='24' y2='24'><stop offset='0%25' stop-color='%237c3aed'/><stop offset='100%25' stop-color='%2338bdf8'/></linearGradient></defs></svg>" alt="Antigravity" />
+                <h4>Antigravity</h4>
+              </div>
+              <div className="skill-card">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d97706'><path d='M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 3.5a1.5 1.5 0 0 1 1.41 1.01l.9 2.7a1.5 1.5 0 0 0 .95.95l2.7.9a1.5 1.5 0 0 1 0 2.84l-2.7.9a1.5 1.5 0 0 0-.95.95l-.9 2.7a1.5 1.5 0 0 1-2.84 0l-.9-2.7a1.5 1.5 0 0 0-.95-.95l-2.7-.9a1.5 1.5 0 0 1 0-2.84l2.7-.9a1.5 1.5 0 0 0 .95-.95l.9-2.7A1.5 1.5 0 0 1 12 5.5z'/></svg>" alt="Claude" />
+                <h4>Claude</h4>
+              </div>
+              <div className="skill-card">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='3' width='18' height='18' rx='4' fill='%23100e18' stroke='%23f472b6'/><path d='m8 10 3 2-3 2'/><path d='m13 14 3 0'/></svg>" alt="OpenCode AI" />
+                <h4>OpenCode AI</h4>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

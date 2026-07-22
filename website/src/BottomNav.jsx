@@ -13,50 +13,69 @@ const iconProps = {
 
 const HomeIcon = (props) => (
   <svg {...iconProps} {...props}>
-    <path d="m3 11 9-8 9 8" />
-    <path d="M5 10v10h14V10" />
-    <path d="M9 20v-6h6v6" />
+    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+    <polyline points="9 22 9 12 15 12 15 22" />
   </svg>
 );
 
-const ProjectsIcon = (props) => (
-  <svg {...iconProps} {...props}>
-    <path d="M4 7h7v7H4z" />
-    <path d="M13 10h7v7h-7z" />
-    <path d="M11 10h2" />
-    <path d="M7.5 14v3a2 2 0 0 0 2 2H13" />
-  </svg>
-);
-
-const UserIcon = (props) => (
+const AboutIcon = (props) => (
   <svg {...iconProps} {...props}>
     <circle cx="12" cy="8" r="4" />
     <path d="M4 21a8 8 0 0 1 16 0" />
   </svg>
 );
 
-const EnvelopeIcon = (props) => (
+const ExploreIcon = (props) => (
   <svg {...iconProps} {...props}>
-    <rect x="3" y="5" width="18" height="14" rx="2" />
-    <path d="m3 7 9 6 9-6" />
+    <circle cx="12" cy="12" r="10" />
+    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+  </svg>
+);
+
+const SkillsIcon = (props) => (
+  <svg {...iconProps} {...props}>
+    <polyline points="16 18 22 12 16 6" />
+    <polyline points="8 6 2 12 8 18" />
+  </svg>
+);
+
+const ProjectsIcon = (props) => (
+  <svg {...iconProps} {...props}>
+    <path d="M2 17l10 5 10-5" />
+    <path d="M2 12l10 5 10-5" />
+    <path d="M12 2L2 7l10 5 10-5L12 2z" />
+  </svg>
+);
+
+const ContactIcon = (props) => (
+  <svg {...iconProps} {...props}>
+    <path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-1.5" />
+    <polyline points="22 6 12 13 2 6" />
   </svg>
 );
 
 const NAV_ITEMS = [
   { id: 'home',     icon: HomeIcon,     label: 'Home'     },
+  { id: 'about',    icon: AboutIcon,    label: 'About'    },
+  { id: 'explore',  icon: ExploreIcon,  label: 'Explore'  },
+  { id: 'skills',   icon: SkillsIcon,   label: 'Skills'   },
   { id: 'projects', icon: ProjectsIcon, label: 'Projects' },
-  { id: 'about',    icon: UserIcon,     label: 'About'    },
-  { id: 'contact',  icon: EnvelopeIcon, label: 'Contact'  },
+  { id: 'contact',  icon: ContactIcon,  label: 'Contact'  },
 ];
 
 export default function BottomNav() {
   const [active, setActive] = useState('home');
   const itemRefs = useRef({});
-  const [dot, setDot] = useState(null); // null until first measurement, avoids a mispositioned flash
+  const [pillStyle, setPillStyle] = useState(null);
 
   const measure = useCallback((id) => {
     const el = itemRefs.current[id];
-    if (el) setDot({ center: el.offsetLeft + el.offsetWidth / 2 });
+    if (el) {
+      setPillStyle({
+        left: el.offsetLeft,
+        width: el.offsetWidth,
+      });
+    }
   }, []);
 
   // Scroll-driven active section
@@ -68,13 +87,13 @@ export default function BottomNav() {
           if (entry.isIntersecting) setActive(entry.target.id);
         });
       },
-      { threshold: 0.35 }
+      { threshold: 0.3 }
     );
     sections.forEach((s) => observer.observe(s));
     return () => sections.forEach((s) => observer.unobserve(s));
   }, []);
 
-  // Measure before paint so the dot never flashes at the wrong spot
+  // Measure active position for pill animation
   useLayoutEffect(() => {
     measure(active);
   }, [active, measure]);
@@ -87,15 +106,21 @@ export default function BottomNav() {
 
   return (
     <div className="dock-wrap">
-      <nav className="dock-bar" aria-label="Primary">
+      <nav className="dock-bar" aria-label="Primary Navigation">
         <span className="dock-brand" aria-hidden="true">AS</span>
-        {dot && (
+
+        {/* Sliding active pill indicator */}
+        {pillStyle && (
           <div
-            className="dock-indicator"
-            style={{ transform: `translateX(${dot.center}px)` }}
+            className="dock-active-pill"
+            style={{
+              left: `${pillStyle.left}px`,
+              width: `${pillStyle.width}px`,
+            }}
             aria-hidden="true"
           />
         )}
+
         {NAV_ITEMS.map(({ id, icon: Icon, label }) => (
           <a
             key={id}
@@ -106,6 +131,7 @@ export default function BottomNav() {
             onClick={() => setActive(id)}
           >
             <span className="dock-item__icon"><Icon aria-hidden="true" /></span>
+            <span className="dock-item__text">{label}</span>
             <span className="dock-item__label">{label}</span>
           </a>
         ))}
