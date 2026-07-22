@@ -850,7 +850,6 @@ h2 {
   background: #fff;
   color: #a855f7;
 }
-
 .project-card__content p {
   font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.55);
@@ -869,7 +868,6 @@ h2 {
   gap: 12px;
   margin-top: auto;
 }
-
 .action-btn {
   width: 44px; 
   height: 44px;
