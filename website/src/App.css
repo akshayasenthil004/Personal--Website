@@ -1046,15 +1046,35 @@ h2 {
 }
 .info-row p { color: var(--muted); line-height: 1.5; font-family: var(--font-mono); font-size: 13.5px; }
 
-.socials { margin-top: 35px; display: flex; align-items: flex-start; justify-content: space-between; flex-direction: column; height: 120px; }
-.socials a {
-  width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--purple), var(--purple-light));
-  color: #000; display: grid; place-items: center; font-weight: 600; cursor: none;
-  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease;
-  box-shadow: 0 4px 14px rgba(124,58,237,0.35); overflow: hidden;
+.socials {
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-direction: row;
+  height: auto;
 }
-.socials a img { height: 100%; width: 100%; object-fit: cover; }
-.socials a:hover { transform: scale(1.15) translateY(-4px); box-shadow: 0 8px 28px rgba(124,58,237,0.6); }
+.socials a {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid rgba(167, 139, 250, 0.25);
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+}
+.socials a:hover {
+  transform: scale(1.12) translateY(-3px);
+  background: rgba(124, 58, 237, 0.2);
+  border-color: var(--cyan);
+  color: var(--cyan);
+  box-shadow: 0 8px 25px rgba(56, 189, 248, 0.4);
+}
 
 /* ══════════════════════════════════════════════
    FOOTER
@@ -1186,6 +1206,17 @@ a:not(.btn):not(.dock-item a):not(.socials a):not(.action-btn):hover::after { wi
 .meta-value {
   font-family: var(--font-body);
   color: var(--text);
+}
+
+.meta-link {
+  font-family: var(--font-mono);
+  color: var(--cyan);
+  transition: color 0.2s ease;
+}
+
+.meta-link:hover {
+  color: var(--purple-light);
+  text-decoration: underline;
 }
 
 .explore-actions {
