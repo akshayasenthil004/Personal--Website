@@ -541,7 +541,7 @@ function App() {
                     <rect x="85" y="138" width="348" height="356" rx="135" ry="135" />
                   </clipPath>
                 </defs>
-                <image href={photoBgRef} width="518" height="509" />
+                {/* <image href={photoBgRef} width="518" height="509" /> */}
                 <image
                   href={img}
                   x="85"
