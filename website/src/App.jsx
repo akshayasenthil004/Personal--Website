@@ -57,13 +57,13 @@ const PROJECTS = [
     title: 'Railway Ticket Booking',
     image: 'https://images.pexels.com/photos/1548693/pexels-photo-1548693.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
     description:
-      'A JavaScript web application that enables users to search trains, select seats, make bookings and view PNR status via client-side logic. Managed client-side state (localStorage) for booking history, implemented form validation, error handling and loading states for improved UX.',
-    summary: 'Interactive train reservation system & PNR lookup.',
+      'An interactive JavaScript web application that enables users to search trains, check seat availability, perform real-time ticket bookings, and verify PNR status seamlessly. Features client-side state management using LocalStorage, robust form validation, and responsive UI components.',
+    summary: 'Interactive train reservation system with seat selection & PNR tracking.',
     year: '2024',
     category: 'Web App',
     tags: ['JavaScript', 'HTML', 'CSS', 'LocalStorage'],
-    live: 'https://railway-reservation-nu.vercel.app/',
-    code: 'https://github.com/AkshayaSenthil08/RailwayReservation',
+    live: 'https://akshayasenthil004.github.io/Railway-Reservation/',
+    code: 'https://github.com/akshayasenthil004/Railway-Reservation',
   },
   {
     id: 'converter',
@@ -71,13 +71,13 @@ const PROJECTS = [
     title: 'Currency Converter',
     image: 'https://media.istockphoto.com/id/483424683/photo/euro-and-dollar-symbol-eur-usd-pair.jpg?s=612x612&w=0&k=20&c=sxpJ59whk1IQbv2O22UE0zYEmZ9zZA76-iJBsrsAa_I=',
     description:
-      'A responsive React web app that converts real-time currency values using exchange rate APIs with dynamic input validation and modern UI. Built a Currency Converter App in React that fetches live exchange rates from a public API (like Exchange Rate API or Free CurrencyAPI).',
-    summary: 'Real-time FX rates converter with clean input validation.',
+      'A responsive React application that provides instant currency conversion using live exchange rate APIs. Features dynamic input validation, real-time rate calculations across global currencies, and a clean, user-friendly interface.',
+    summary: 'Real-time global currency converter with live API rate integration.',
     year: '2024',
     category: 'React App',
-    tags: ['React', 'JavaScript', 'API'],
-    live: 'https://converter-three-mu.vercel.app/',
-    code: 'https://github.com/AkshayaSenthil08/Converter',
+    tags: ['React', 'JavaScript', 'REST API'],
+    live: 'https://akshayasenthil004.github.io/Currency-Converter/',
+    code: 'https://github.com/akshayasenthil004/Currency-Converter',
   },
   {
     id: 'crud',
@@ -703,19 +703,19 @@ function App() {
             <h3 className="category-title">Frontend & CMS</h3>
             <div className="skills-grid">
               <div className="skill-card">
-                <img src="https://dev-portfolio-template.netlify.app/static/media/react.2b6a0717.svg" alt="React" />
+                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" alt="React" />
                 <h4>React</h4>
               </div>
               <div className="skill-card">
-                <img src="https://dev-portfolio-template.netlify.app/static/media/javascript.e9360603.svg" alt="JavaScript" />
+                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="JavaScript" />
                 <h4>JavaScript</h4>
               </div>
               <div className="skill-card">
-                <img src="https://dev-portfolio-template.netlify.app/static/media/html.6a342d61.svg" alt="HTML" />
+                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" alt="HTML" />
                 <h4>HTML</h4>
               </div>
               <div className="skill-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/CSS3_logo.svg/2048px-CSS3_logo.svg.png" alt="CSS" />
+                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" alt="CSS" />
                 <h4>CSS</h4>
               </div>
               <div className="skill-card">
